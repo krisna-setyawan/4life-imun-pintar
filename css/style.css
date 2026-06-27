@@ -518,7 +518,7 @@ a { text-decoration: none; color: inherit; }
 
 .segmen-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
@@ -814,24 +814,6 @@ a { text-decoration: none; color: inherit; }
   font-size: 0.82rem;
 }
 
-/* ===== KANKER HATI IMAGE ===== */
-.kanker-section {
-  background: var(--white);
-  padding: 60px 0;
-}
-
-.kanker-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.kanker-inner img {
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
 /* ===== SLIDER DOTS ===== */
 .slider-dots {
   display: none;
@@ -875,8 +857,6 @@ a { text-decoration: none; color: inherit; }
   .dosis-grid { grid-template-columns: 1fr; }
 
   .footer-inner { grid-template-columns: 1fr; gap: 24px; }
-
-  .kanker-inner { grid-template-columns: 1fr; }
 
   .cta-buttons { flex-direction: column; align-items: center; }
 
