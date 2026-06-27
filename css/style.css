@@ -625,7 +625,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .dosis-card table tbody tr:nth-child(odd) {
-  background: var(--blue-light);
+  background: #FFFFFF;
 }
 
 .dosis-card table tbody tr:nth-child(even) {
