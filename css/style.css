@@ -882,14 +882,13 @@ a { text-decoration: none; color: inherit; }
   .testi-grid {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     gap: 16px;
     margin: 0 -20px;
     padding: 4px 20px 16px 28px;
     scroll-padding-left: 28px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    touch-action: pan-x;
   }
 
   .masalah-grid::-webkit-scrollbar,
