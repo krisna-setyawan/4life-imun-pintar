@@ -72,15 +72,17 @@ function initMobileSliders() {
       });
     }, { passive: true });
 
-    // Swipe kiri/kanan digerakkan manual lewat JS (touch-action: pan-y di CSS
-    // mematikan native horizontal pan) supaya swipe atas/bawah selalu jadi scroll halaman.
-    let startX = 0, startY = 0, startScrollLeft = 0, direction = null;
+    // touch-action: none di CSS mematikan SEMUA native scroll di area ini,
+    // jadi swipe horizontal (geser slider) maupun vertikal (scroll halaman)
+    // dua-duanya dijalankan manual lewat JS supaya arahnya gak rebutan.
+    let startX = 0, startY = 0, startScrollLeft = 0, startWinScrollY = 0, direction = null;
 
     grid.addEventListener('touchstart', e => {
       const t = e.touches[0];
       startX = t.clientX;
       startY = t.clientY;
       startScrollLeft = grid.scrollLeft;
+      startWinScrollY = window.scrollY;
       direction = null;
     }, { passive: true });
 
@@ -89,13 +91,16 @@ function initMobileSliders() {
       const dx = t.clientX - startX;
       const dy = t.clientY - startY;
 
-      if (direction === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      if (direction === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
         direction = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
       }
 
       if (direction === 'horizontal') {
         e.preventDefault();
         grid.scrollLeft = startScrollLeft - dx;
+      } else if (direction === 'vertical') {
+        e.preventDefault();
+        window.scrollTo(0, startWinScrollY - dy);
       }
     }, { passive: false });
 
