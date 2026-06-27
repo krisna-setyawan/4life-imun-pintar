@@ -71,6 +71,47 @@ function initMobileSliders() {
         dot.classList.toggle('active', i === activeIndex);
       });
     }, { passive: true });
+
+    // Swipe kiri/kanan digerakkan manual lewat JS (touch-action: pan-y di CSS
+    // mematikan native horizontal pan) supaya swipe atas/bawah selalu jadi scroll halaman.
+    let startX = 0, startY = 0, startScrollLeft = 0, direction = null;
+
+    grid.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      startScrollLeft = grid.scrollLeft;
+      direction = null;
+    }, { passive: true });
+
+    grid.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+
+      if (direction === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        direction = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
+      }
+
+      if (direction === 'horizontal') {
+        e.preventDefault();
+        grid.scrollLeft = startScrollLeft - dx;
+      }
+    }, { passive: false });
+
+    grid.addEventListener('touchend', () => {
+      if (direction === 'horizontal') {
+        const pl = parseInt(getComputedStyle(grid).paddingLeft) || 28;
+        let nearest = cards[0];
+        let minDist = Infinity;
+        cards.forEach(card => {
+          const dist = Math.abs((card.offsetLeft - pl) - grid.scrollLeft);
+          if (dist < minDist) { minDist = dist; nearest = card; }
+        });
+        grid.scrollTo({ left: nearest.offsetLeft - pl, behavior: 'smooth' });
+      }
+      direction = null;
+    });
   });
 }
 
