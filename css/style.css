@@ -112,6 +112,9 @@ a { text-decoration: none; color: inherit; }
 }
 
 .navbar-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: var(--gold);
   color: var(--blue-dark);
   padding: 8px 20px;
@@ -119,9 +122,15 @@ a { text-decoration: none; color: inherit; }
   font-weight: 700;
   font-size: 0.9rem;
   transition: background 0.2s;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .navbar-cta:hover { background: var(--gold-dark); }
+
+.navbar-cta-text-short { display: none; }
+
+.navbar-cta-icon { color: var(--white); }
 
 /* ===== HERO ===== */
 .hero {
@@ -872,6 +881,19 @@ a { text-decoration: none; color: inherit; }
   .cta-buttons { flex-direction: column; align-items: center; }
 
   .navbar .container { padding: 0 16px; }
+
+  .navbar-brand .brand-text { font-size: 0.95rem; }
+  .navbar-brand .brand-text span { font-size: 0.65rem; }
+
+  .navbar-cta {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    gap: 4px;
+    margin-left: 8px;
+  }
+
+  .navbar-cta-text-full { display: none; }
+  .navbar-cta-text-short { display: inline; }
 
   /* Mobile sliders */
   .masalah-grid,
